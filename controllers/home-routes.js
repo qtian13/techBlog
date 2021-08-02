@@ -3,9 +3,10 @@ const { User, Blog, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 const Op = require('sequelize').Op;
 
-// get all blogs with users' info
 router.get('/', async (req, res) => {
+    console.log("get home request");
     try {
+        // get all blogs and JOIN with user data
         const dbBlogData = await Blog.findAll({
             include: [
                 {
@@ -15,22 +16,23 @@ router.get('/', async (req, res) => {
             ],
         });
 
+        // Serialize data so the template can read it
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
-        res.status(200).json(blogs);
 
-        // res.render('homepage', {
-        //     blogs,
-        //     loggedIn: req.session.loggedIn,
-        // });
+        // Pass serialized data and session flag into template
+        res.render('homepage', {
+            blogs,
+            loggedIn: req.session.loggedIn,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
 
-// GET a certain blog with complete contents and comments
 router.get('/blog/:id', async (req, res) => {
     try {
+        // GET a certain blog with complete contents and comments
         const dbBlogData = await Blog.findByPk(req.params.id, {
             include: [
                 {
@@ -49,12 +51,15 @@ router.get('/blog/:id', async (req, res) => {
             res.status(404).json({ message: 'No blog found with that id!' });
             return;
         }
+        console.log("before");
+        console.log(blog);
 
+        commentsIdArr = blog.comments.map(comment => comment.id);
         if (blog.comments.length != 0) {
             const dbCommentData = await Comment.findAll(
                 {
                     where: {
-                        id: {[Op.in]: [1 , 2]},
+                        id: {[Op.in]: commentsIdArr},
                     },
                 
                     include: [{
@@ -66,11 +71,14 @@ router.get('/blog/:id', async (req, res) => {
             const comments = dbCommentData.map(comment => comment.get({plain: true}));
             blog.comments = comments;
         }
+
+        console.log("after");
+        console.log(blog);
         
         res.status(200).json(blog);
 
         // res.render('blog', {
-        //     blog,
+        //     ...blog,
         //     loggedIn: req.session.loggedIn,
         // });
     } catch (err) {
@@ -80,20 +88,20 @@ router.get('/blog/:id', async (req, res) => {
 });
 
 
-// GET all blogs of user logged in right now
+// Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
-        const dbBlogData = await Blog.findAll({
-            where: {
-                user_id: req.session.userId,
-            }
+        // Find the logged in user based on the session ID
+        const dbUserData = await User.findByPk(req.session.userId, {
+            attributes: { exclude: ['password'] },
+            include: [{ model: Blog }],
         });
 
-        const blogs = dbBlogData.map(blog => blog.get({ plain: true }));
-        res.status(200).json(blogs);
+        const user = dbUserData.get({ plain: true });
+        res.status(200).json(user);
 
         // res.render('blog', {
-        //     blogs,
+        //     ...user,
         //     loggedIn: req.session.loggedIn,
         // });
     } catch (err) {
@@ -102,30 +110,41 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 });
 
-// 
-router.get('/dashboard/:id', withAuth, async (req, res) => {
-    try {
-        const dbBlogData = await Blog.findByPk(req.params.id);
-        const blog = dbBlogData.get({ plain: true })
-        if (!blog) {
-            res.status(404).json({ message: 'Sorry no blog found with that id!'});
-            return;
-        } else if (blog.user_id !== req.session.userId) {
-            res.status(404).json({ message: 'Sorry the blog with that id is not yours!'});
-            return;
-        } else {
-            res.status(200).json(blog);
-            return;
-        }
+// // Use withAuth middleware to prevent access to route
+// router.get('/dashboard/:id', withAuth, async (req, res) => {
+//     try {
+//         const dbBlogData = await Blog.findByPk(req.params.id);
+//         const blog = dbBlogData.get({ plain: true })
+//         if (!blog) {
+//             res.status(404).json({ message: 'Sorry no blog found with that id!'});
+//             return;
+//         } else if (blog.user_id !== req.session.userId) {
+//             res.status(404).json({ message: 'Sorry the blog with that id is not yours!'});
+//             return;
+//         } else {
+//             res.status(200).json(blog);
+//             return;
+//         }
 
-        // res.render('blog', {
-        //     blog,
-        //     loggedIn: req.session.loggedIn,
-        // });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+//         // res.render('blog', {
+//         //     blog,
+//         //     loggedIn: req.session.loggedIn,
+//         // });
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// });
+
+router.get('/login', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    if (req.session.logged_in) {
+      res.redirect('/profile');
+      return;
     }
+  
+    res.render('login');
 });
+  
 
 module.exports = router;
