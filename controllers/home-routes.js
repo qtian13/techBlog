@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Blog, Comment } = require('../models');
-const withAuth = require('../utils/auto');
+const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
@@ -105,4 +105,6 @@ router.get('/dashboard/:id', withAuth, async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-})
+});
+
+module.exports = router;

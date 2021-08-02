@@ -65,7 +65,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // CREATE comment
-router.post('/:id', (req, res) => {
+router.post('/:id', async (req, res) => {
     try {
         const dbCommentData = await Comment.create(
             {
