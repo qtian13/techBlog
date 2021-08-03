@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
         res.render('homepage', {
             blogs,
             loggedIn: req.session.loggedIn,
+            title: "Tech Blog"
         });
     } catch (err) {
         console.log(err);
@@ -75,12 +76,13 @@ router.get('/blog/:id', async (req, res) => {
         console.log("after");
         console.log(blog);
         
-        res.status(200).json(blog);
+        // res.status(200).json(blog);
 
-        // res.render('blog', {
-        //     ...blog,
-        //     loggedIn: req.session.loggedIn,
-        // });
+        res.render('blog', {
+            ...blog,
+            loggedIn: req.session.loggedIn,
+            title: "Tech Blog"
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -98,12 +100,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
         });
 
         const user = dbUserData.get({ plain: true });
-        res.status(200).json(user);
+        // res.status(200).json(user);
 
-        // res.render('blog', {
-        //     ...user,
-        //     loggedIn: req.session.loggedIn,
-        // });
+        res.render('blog', {
+            ...user,
+            loggedIn: req.session.loggedIn,
+            title: "Dashboard"
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -138,12 +141,27 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route
-    if (req.session.logged_in) {
-      res.redirect('/profile');
+    if (req.session.loggedIn) {
+      res.redirect('/dashboard');
       return;
     }
   
-    res.render('login');
+    res.render('login', {
+        title: 'Tech Blog'
+    });
+});
+
+router.get('/signup', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    console.log(req.session.log)
+    if (req.session.loggedIn) {
+      res.redirect('/dashboard');
+      return;
+    }
+  
+    res.render('signup', {
+        title: 'Tech Blog'
+    });
 });
   
 
