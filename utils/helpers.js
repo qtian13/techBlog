@@ -1,6 +1,6 @@
-const format_time = (date) => {
-    return date.toLocaleTimeString();
+const format_date = (date) => {
+    return date.toLocaleDateString();
 }
 
-module.exports = format_time;
+module.exports = {format_date};
   

@@ -1,6 +1,11 @@
-<section class="card">
+<section class="card card-rounded blog-list">
     <a href="/blog/{{id}}">
-        <header>{{title}}</header>
-        <p class="card-content">{{content}}</p>
+        <div class="card-header display-flex justify-space-between align-center">
+            <h2>{{title}}</h2>
+            <div>Posted by {{user.username}} on {{format_date date_created}}</div>
+        </div>
+        <div class="card-body">
+            <div>{{content}}</div>
+        </div>
     </a>
 </section>

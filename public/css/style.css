@@ -1,6 +1,52 @@
-header, .blog:not(:last-child) {
+/* header, .blog:not(:last-child) {
     border-bottom: 1px solid #ccc;
+} */
+
+header {
+    padding: 40px 60px;
 }
+
+header h1 {
+    font-size: 4rem;
+}
+
+main {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav a {
+    padding: 2px 10px;
+    font-size: 1.5rem;
+}
+
+.card.blog-list {
+    height: 140px;
+    overflow: hidden;
+}
+
+.card a:hover {
+    text-decoration: none;
+}
+
+.card .card-header, .card .card-body {
+    padding: 10px 20px;
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.card-header div {
+    font-size: 1rem;
+}
+
+.card-body div {
+    font-size: 1.3rem;
+}
+
   
 .no-button {
     background: none;

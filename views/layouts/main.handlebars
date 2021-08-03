@@ -5,22 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
+    <link rel="stylesheet" href="/css/jass.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>{{title}}</h1>
-    </header>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/dashboard">Dashboard</a>
-        {{#if loggedIn}}
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
-        {{/if}}
-    </nav>
+
+    <div class="flex-column justify-space-around">
+        <header class="display-flex justify-space-between align-center">
+            {{#if dashboardPage}}
+                <h1><a href="/dashboard">Dashboard</a></h1>
+            {{else}}
+                <h1><a href="/">Tech Blog</a></h1>
+            {{/if}}
+            <nav>
+                <a href="/">Home</a>
+                <a href="/dashboard">Dashboard</a>
+                {{#if loggedIn}}
+                <a id="logout">logout</a>
+                {{else}}
+                <a href="/login">Login</a>
+                <a href="/signup">Signup</a>
+                {{/if}}
+            </nav>
+        </header>
+    </div>
+    
+    
     <main>
         <div>{{{body}}}</div>
     </main>

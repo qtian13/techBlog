@@ -19,11 +19,12 @@ router.get('/', async (req, res) => {
         // Serialize data so the template can read it
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
 
+        console.log(blogs);
         // Pass serialized data and session flag into template
         res.render('homepage', {
             blogs,
             loggedIn: req.session.loggedIn,
-            title: "Tech Blog"
+            dashboardPage: false
         });
     } catch (err) {
         console.log(err);
@@ -81,7 +82,7 @@ router.get('/blog/:id', async (req, res) => {
         res.render('blog', {
             ...blog,
             loggedIn: req.session.loggedIn,
-            title: "Tech Blog"
+            dashboardPage: false
         });
     } catch (err) {
         console.log(err);
@@ -105,7 +106,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
         res.render('blog', {
             ...user,
             loggedIn: req.session.loggedIn,
-            title: "Dashboard"
+            dashboardPage: true
         });
     } catch (err) {
         console.log(err);
@@ -147,7 +148,7 @@ router.get('/login', (req, res) => {
     }
   
     res.render('login', {
-        title: 'Tech Blog'
+        dashboardPage: false
     });
 });
 
@@ -160,7 +161,7 @@ router.get('/signup', (req, res) => {
     }
   
     res.render('signup', {
-        title: 'Tech Blog'
+        dashboardPage: false
     });
 });
   
