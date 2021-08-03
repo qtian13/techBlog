@@ -1,5 +1,6 @@
 header {
-    padding: 40px 200px;
+    padding: 40px 10px;
+    width: 80%;
 }
 
 header a, .card-body {
