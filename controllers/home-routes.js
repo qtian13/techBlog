@@ -47,9 +47,6 @@ router.get('/blog/:id', async (req, res) => {
             ],
         });
 
-        console.log(dbBlogData);
-
-        
         if (!dbBlogData) {
             res.status(404).json({ message: 'No blog found with that id!' });
             return;
