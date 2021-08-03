@@ -6,6 +6,7 @@ const logout = async () => {
         }
     });
 
+    // redirect to homepage when logged out
     if (response.ok) {
         document.location.replace('/');
     } else {

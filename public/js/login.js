@@ -13,6 +13,7 @@ const loginFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json'},
         });
 
+        // redirect the user to dashboard when logged in
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {

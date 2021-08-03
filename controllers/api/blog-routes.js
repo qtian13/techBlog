@@ -20,7 +20,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-// UPDATE an existing blog
+// UPDATE an existing blog with id === req.params.id
 router.put('/:id', withAuth, async (req, res) => {
     try {
         let dbBlogData = await Blog.findByPk(req.params.id);
@@ -50,7 +50,7 @@ router.put('/:id', withAuth, async (req, res) => {
     }
 });
 
-// DELETE an existing blog
+// DELETE an existing blog with id === req.params.id
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         let dbBlogData = await Blog.findByPk(req.params.id);
@@ -74,7 +74,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
 });
 
-// CREATE comment
+// CREATE comment to the blog with id === req.params.id
 router.post('/:id', withAuth, async (req, res) => {
     try {
         const dbCommentData = await Comment.create(

@@ -1,15 +1,10 @@
 const signupFormHandler = async (event) => {
-    console.log("signing up starts");
     event.preventDefault();
-
-    console.log("signing up starts");
 
     // collect values from the signup form
     const username = document.querySelector('#username-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
 
-    console.log("username: " + username);
-    console.log("password: " + password);
     if (username && password) {
         // send a POST request to the API endpoint
         const response = await fetch('/api/users', {
@@ -18,6 +13,7 @@ const signupFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json'},
         });
 
+        // redirect to dashboard after sign up successfully
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
@@ -25,8 +21,6 @@ const signupFormHandler = async (event) => {
         }
     }
 };
-
-console.log("i am here");
 
 document
   .querySelector('.signup-form')

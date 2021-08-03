@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+// login to an existing account
 router.post('/login', async (req, res) => {
     try {
         const dbUserData = await User.findOne({
@@ -31,6 +32,7 @@ router.post('/login', async (req, res) => {
             },
         });
 
+        // if username is not found
         if (!dbUserData) {
             res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
             return;
@@ -38,6 +40,7 @@ router.post('/login', async (req, res) => {
 
         const validPassword = await dbUserData.checkPassword(req.body.password);
 
+        // if username and password do not match
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
             return;
@@ -56,6 +59,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// logout the current account and destroy the session
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {

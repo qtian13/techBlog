@@ -14,7 +14,7 @@ router.get('/', withAuth, async (req, res) => {
         const user = dbUserData.get({ plain: true });
         // res.status(200).json(user);
 
-        console.log(user);
+        // display dashboard page with data of the user logged in
         res.render('dashboard', {
             ...user,
             loggedIn: req.session.loggedIn,
@@ -26,6 +26,7 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
+// create new blog only when logged in
 router.get('/newpost', withAuth, async (req, res) => {
     try {        
         res.render('newpost', {
@@ -38,6 +39,8 @@ router.get('/newpost', withAuth, async (req, res) => {
     }
 });
 
+// when user want to edit an existing blog
+// response with the blog data with id === req.params.id when logged in
 router.get('/edit/:id', withAuth, async (req, res) => {
     try {  
         const dbUserData = await User.findByPk(req.session.userId, {

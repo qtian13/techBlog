@@ -14,6 +14,7 @@ const createPostHandler = async (event) => {
             },
         });
     
+        // redirect to dashboard page after creating a new blog successfully
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {

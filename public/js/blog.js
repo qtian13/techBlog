@@ -1,12 +1,12 @@
 const createCommentHandler = async (event) => {
     event.preventDefault();
-    console.log("try to submit comment");
-    // const id = parseInt(event.target.getAttribute("data-id"));
   
+    // get content of comment
     const content = document.querySelector('#comment-content').value.trim();
+    // create req url based on current location
     const url = document.location.toString().split("blog").join("api/blogs");
-    // console.log(id);
-    // console.log(content);
+
+    // if content is not empty, create a new comment and add it to database
     if (content) {
         const response = await fetch(url, {
             method: 'POST',
@@ -16,15 +16,14 @@ const createCommentHandler = async (event) => {
             },
         });
     
+        // reload the page when after post successfully
         if (response.ok) {
-            console.log("comment posted");
             document.location.reload();
         } else {
             alert('Failed to create project');
         }
     }
 };
-
 
 document
   .querySelector('.new-comment-form')
