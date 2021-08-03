@@ -90,57 +90,6 @@ router.get('/blog/:id', async (req, res) => {
     }
 });
 
-
-// Use withAuth middleware to prevent access to route
-router.get('/dashboard', withAuth, async (req, res) => {
-    try {
-        // Find the logged in user based on the session ID
-        const dbUserData = await User.findByPk(req.session.userId, {
-            attributes: { exclude: ['password'] },
-            include: [{ model: Blog }],
-        });
-
-        const user = dbUserData.get({ plain: true });
-        // res.status(200).json(user);
-
-        console.log(user);
-        res.render('dashboard', {
-            ...user,
-            loggedIn: req.session.loggedIn,
-            dashboardPage: true
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-// // Use withAuth middleware to prevent access to route
-// router.get('/dashboard/:id', withAuth, async (req, res) => {
-//     try {
-//         const dbBlogData = await Blog.findByPk(req.params.id);
-//         const blog = dbBlogData.get({ plain: true })
-//         if (!blog) {
-//             res.status(404).json({ message: 'Sorry no blog found with that id!'});
-//             return;
-//         } else if (blog.user_id !== req.session.userId) {
-//             res.status(404).json({ message: 'Sorry the blog with that id is not yours!'});
-//             return;
-//         } else {
-//             res.status(200).json(blog);
-//             return;
-//         }
-
-//         // res.render('blog', {
-//         //     blog,
-//         //     loggedIn: req.session.loggedIn,
-//         // });
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json(err);
-//     }
-// });
-
 router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route
     if (req.session.loggedIn) {

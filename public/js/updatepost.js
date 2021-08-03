@@ -24,15 +24,11 @@ const updatePostHandler = async (event) => {
 
 const deletePostHandler = async (event) => {
     event.preventDefault();
-    
+
     const id = parseInt(event.target.getAttribute("data-id"));
     if (id) {
         const response = await fetch(`/api/blogs/${id}`, {
             method: 'DELETE',
-            // body: JSON.stringify({ title, content }),
-            // headers: {
-            // 'Content-Type': 'application/json',
-            // },
         });
     
         if (response.ok) {
