@@ -3,7 +3,11 @@
 } */
 
 header {
-    padding: 40px 60px;
+    padding: 40px 200px;
+}
+
+header a, .card-body {
+    color: #2d3e50;
 }
 
 header h1 {
@@ -22,6 +26,18 @@ nav a {
 .card.blog-list {
     height: 140px;
     overflow: hidden;
+}
+
+.card.comment:not(:last-of-type) {
+    border-bottom: none;
+}
+
+.card.comment:last-of-type {
+    margin-bottom: 280px;
+}
+
+.card.comment {
+    margin: 0px;
 }
 
 .card a:hover {
@@ -45,6 +61,10 @@ nav a {
     font-size: 1.3rem;
 }
 
+.blog-details {
+    margin-bottom: 100px;
+}
+
 main {
     height: 100%;
 }
@@ -59,9 +79,15 @@ main {
 }
 
 .position-bottom {
+    background-color: white;
+    z-index: 10;
     position: fixed;
     width: 80%;
-    bottom: 50px;
+    bottom: 0px;
+}
+
+.position-bottom > button {
+    margin-bottom: 100px;
 }
 
 .no-button {

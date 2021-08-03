@@ -47,14 +47,15 @@ router.get('/blog/:id', async (req, res) => {
             ],
         });
 
-        const blog = dbBlogData.get({ plain: true });
+        console.log(dbBlogData);
+
         
-        if (!blog) {
+        if (!dbBlogData) {
             res.status(404).json({ message: 'No blog found with that id!' });
             return;
         }
-        console.log("before");
-        console.log(blog);
+
+        const blog = dbBlogData.get({ plain: true });
 
         commentsIdArr = blog.comments.map(comment => comment.id);
         if (blog.comments.length != 0) {
@@ -73,12 +74,15 @@ router.get('/blog/:id', async (req, res) => {
             const comments = dbCommentData.map(comment => comment.get({plain: true}));
             blog.comments = comments;
         }
-
-        console.log("after");
-        console.log(blog);
         
         // res.status(200).json(blog);
-
+        console.log("final data");
+        
+        console.log(blog);
+        console.log("log status");
+        console.log(req.session.loggedIn);
+        console.log({...blog, loggedIn:req.session.loggedIn,
+            dashboardPage: false});
         res.render('blog', {
             ...blog,
             loggedIn: req.session.loggedIn,

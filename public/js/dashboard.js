@@ -3,7 +3,6 @@ const newPostHandler = async (event) => {
     document.location.replace('/dashboard/newpost');
 };
 
-
 document
   .querySelector('#new-post')
   .addEventListener('click', newPostHandler);
