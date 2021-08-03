@@ -21,7 +21,6 @@ git clone https://github.com/qtian13/techBlog.git
 ```bash
 npm init -y
 npm i
-npm run seed
 ```
 ## Built With
 * [JavaScript](https://www.javascript.com/)
