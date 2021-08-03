@@ -62,7 +62,7 @@ nav a {
 }
 
 .card-body .content {
-    white-space: pre-wrap;
+    white-space: pre-line;
 }
 
 .blog-details {
