@@ -12,8 +12,6 @@ header h1 {
 
 main {
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 nav a {
@@ -47,7 +45,25 @@ nav a {
     font-size: 1.3rem;
 }
 
-  
+main {
+    height: 100%;
+}
+
+#blog-content {
+    height: 300px;
+}
+
+.btn.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.position-bottom {
+    position: fixed;
+    width: 80%;
+    bottom: 50px;
+}
+
 .no-button {
     background: none;
     border: none;

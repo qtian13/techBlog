@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Update Blog</h2>
+    </div>
+    <div class="card-body">
+        <form class="form update-blog-form">
+            <div class="form-group">
+                <label for="updated-blog-title">Title:</label>
+                <textarea class="form-input" type="text" id="updated-blog-title" name="updated-blog-title" rows="1">{{blogs.[0].title}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="updated-blog-content">Content:</label>
+                <textarea class="form-input" type="text" id="updated-blog-content" name="updated-blog-content" rows="10">{{blogs.[0].content}}</textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" data-id="{{blogs.[0].id}}" id="update-blog-button" class="btn btn-primary btn-block">Update Blog</button>
+            </div>
+            <div class="form-group">
+                <button type="delete" data-id="{{blogs.[0].id}}" id="delete-blog-button" class="btn btn-primary btn-block">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/js/updatepost.js"></script>

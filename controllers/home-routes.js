@@ -103,7 +103,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
         const user = dbUserData.get({ plain: true });
         // res.status(200).json(user);
 
-        res.render('blog', {
+        console.log(user);
+        res.render('dashboard', {
             ...user,
             loggedIn: req.session.loggedIn,
             dashboardPage: true
