@@ -6,6 +6,7 @@ This project is to build a CMS-style blog site so that developers who writes abo
 * [Built With](#built-with)
 * [Features](#features)
 * [Live URL](#live-url)
+* [Demo Gif](#demo-gif)
 * [Author](#author)
 * [Questions](#questions)
 * [Acknowledgments](#acknowledgments)
@@ -44,11 +45,16 @@ npm run seed
 * When user click on the `Create` button to create a new blog post, the title and contents of their post are saved and they are taken back to an updated dashboard with their new blog post
 * When user click on one of their existing posts in the dashboard, they are able to `delete` or `update` their post and taken back to an updated dashboard
 * When user click on the `logout` option in the navigation, they are signed out of the site
-* When user am idle on the page for more than a set time, they are automatically signed out of the site
+* When user is idle on the page for more than 30 min, they are automatically signed out of the site
+
+   <img src="assets/images/cookie.png" alt="time-limit" width="300">
 
 
 ## Live URL
 Check the page: [https://secure-reaches-70469.herokuapp.com/](https://secure-reaches-70469.herokuapp.com/)
+
+## Demo Gif
+![tech blog Demo](assets/images/demo.gif)
 
 ## Author
 Qiushuang Tian
