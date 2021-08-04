@@ -54,7 +54,6 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 
         const user = dbUserData.get({ plain: true });
 
-        console.log(user);
         res.render('updatepost', {
             ...user,
             loggedIn: req.session.loggedIn,

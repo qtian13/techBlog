@@ -4,7 +4,6 @@ const withAuth = require('../utils/auth');
 const Op = require('sequelize').Op;
 
 router.get('/', async (req, res) => {
-    console.log("get home request");
     try {
         // get all blogs and JOIN with user data
         const dbBlogData = await Blog.findAll({
@@ -19,7 +18,6 @@ router.get('/', async (req, res) => {
         // Serialize data so the template can read it
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
 
-        console.log(blogs);
         // Pass serialized data and session flag into template
         res.render('homepage', {
             blogs,
@@ -99,7 +97,6 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
     // If the user is already logged in, redirect the request to another route
-    console.log(req.session.log)
     if (req.session.loggedIn) {
       res.redirect('/dashboard');
       return;

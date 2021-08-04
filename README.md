@@ -44,7 +44,7 @@ npm i
 * When user click on the `Create` button to create a new blog post, the title and contents of their post are saved and they are taken back to an updated dashboard with their new blog post
 * When user click on one of their existing posts in the dashboard, they are able to `delete` or `update` their post and taken back to an updated dashboard
 * When user click on the `logout` option in the navigation, they are signed out of the site
-* When user is idle on the page for more than 30 min, they are automatically signed out of the site
+* When user is logged in for more than 30 min, they are automatically signed out of the site
 
    <img src="assets/images/cookie.png" alt="time-limit" width="300">
 
